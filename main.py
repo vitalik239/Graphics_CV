@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
 		MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
 		self.newCurveButton.setText(_translate("MainWindow", "New curve"))
 		self.deleteCurveButton.setText(_translate("MainWindow", "Delete curve"))
-		self.label.setText(_translate("MainWindow", "Order"))
+		self.label.setText(_translate("MainWindow", "Degree"))
 		self.label2.setText(_translate("MainWindow", "Weight"))
 
 	def add_curve(self):
