@@ -27,12 +27,27 @@ class MainWindow(QMainWindow):
 		self.label.setObjectName("label")
 
 		self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
-		self.spinBox.setGeometry(QtCore.QRect(700, 91, 48, 24))
+		self.spinBox.setGeometry(QtCore.QRect(720, 91, 48, 24))
 		self.spinBox.setMinimum(1)
 		self.spinBox.setMaximum(10)
 		self.spinBox.setObjectName("spinBox")
 		self.spinBox.valueChanged.connect(self.set_power)
 		self.spinBox.setFocusPolicy(QtCore.Qt.NoFocus)
+
+		self.label2 = QtWidgets.QLabel(self.centralwidget)
+		self.label2.setGeometry(QtCore.QRect(650, 121, 60, 24))
+		self.label2.setObjectName("label2")
+
+		self.spinBox2 = QtWidgets.QDoubleSpinBox(self.centralwidget)
+		self.spinBox2.setGeometry(QtCore.QRect(720, 121, 48, 24))
+		self.spinBox2.setMinimum(0.1)
+		self.spinBox2.setMaximum(10)
+		self.spinBox2.setObjectName("spinBox2")
+		self.spinBox2.setSingleStep(0.1)
+		self.spinBox2.setDecimals(1)
+		self.spinBox2.setValue(1.0)
+		self.spinBox2.valueChanged.connect(self.set_weight)
+		self.spinBox2.setFocusPolicy(QtCore.Qt.NoFocus)
 
 		self.newCurveButton = QtWidgets.QPushButton(self.centralwidget)
 		self.newCurveButton.setGeometry(QtCore.QRect(630, 330, 141, 61))
@@ -70,13 +85,15 @@ class MainWindow(QMainWindow):
 		MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
 		self.newCurveButton.setText(_translate("MainWindow", "New curve"))
 		self.deleteCurveButton.setText(_translate("MainWindow", "Delete curve"))
-		self.label.setText(_translate("MainWindow", "Power"))
+		self.label.setText(_translate("MainWindow", "Order"))
+		self.label2.setText(_translate("MainWindow", "Weight"))
 
 	def add_curve(self):
 		self.board.add_curve()
 		self.comboBoxCounter += 1
 		self.comboBox.addItem(str(self.comboBoxCounter))
 		self.comboBox.setCurrentIndex(self.comboBoxCounter - 1)
+		self.spinBox.setValue(1)
 
 	def delete_curve(self):
 		self.board.delete_curve()
@@ -90,6 +107,9 @@ class MainWindow(QMainWindow):
 
 	def set_power(self):
 		self.board.set_power(self.spinBox.value())
+
+	def set_weight(self):
+		self.board.set_weight(self.spinBox2.value())
 
 if __name__ == "__main__":
 	import sys

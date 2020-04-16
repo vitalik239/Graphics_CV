@@ -17,6 +17,8 @@ class Board(QtWidgets.QFrame):
 		self.setObjectName("board")
 		self.setStyleSheet("QWidget { background-color: %s }" % QtGui.QColor(255, 255, 255).name())
 
+		self.parent = parent
+
 		self.curves = [Curve()]
 		self.cur_curve_index = 0
 
@@ -74,11 +76,23 @@ class Board(QtWidgets.QFrame):
 				self.point_selected = i
 				self.selected_x = ex
 				self.selected_y = ey
-	
+
+		if self.point_selected is not None:
+			x, y, w = cur_curve.points[self.point_selected]
+			self.parent.spinBox2.setValue(w)
+
 		self.update()
 
 	def delete_last_point(self):
-		self.curves[self.cur_curve_index].delete_point()
+		cur_curve = self.curves[self.cur_curve_index]
+		cur_curve.delete_point()
+		if len(cur_curve.points) > 0:
+			self.point_selected = len(cur_curve.points) - 1
+			(x, y, w) = cur_curve.points[-1]
+			self.parent.spinBox2.setValue(w)
+		else:
+			self.point_selected = None
+			
 		self.update()
 
 	def delete_curve(self):
@@ -105,6 +119,11 @@ class Board(QtWidgets.QFrame):
 		self.curves[self.cur_curve_index].set_power(power)
 
 		self.update()
+
+	def set_weight(self, weight):
+		if self.point_selected is not None:
+			self.curves[self.cur_curve_index].set_weight(self.point_selected, weight)
+			self.update()
 
 	def paintEvent(self, event):
 		painter = QPainter(self)

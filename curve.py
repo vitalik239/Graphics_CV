@@ -1,10 +1,12 @@
 from PyQt5.QtCore import QPointF
 from PyQt5.QtGui import QPolygonF
+from nurbs import deBoor
 
 class Curve:
 	def __init__(self, power = 1):
 		self.points = []
 		self.power = power
+
 
 		self.is_changed = True
 		self.plot = None
@@ -33,7 +35,14 @@ class Curve:
 		self.is_changed = True
 
 	def draw_plot(self):
-		self.plot = QPolygonF([QPointF(x, y) for (x, y, w) in self.points])
+		if self.power == 1:
+			new_points = self.points
+		elif self.power <= len(self.points) - 1:
+			new_points = deBoor(self.points, self.power).get_curve()
+		else:
+			new_points = []
+		self.plot = QPolygonF([QPointF(x, y) for (x, y, w) in new_points])
+
 		self.is_changed = False
 
 	def get_plot(self):
