@@ -33,7 +33,7 @@ class Board(QtWidgets.QFrame):
 		cur_curve = self.curves[self.cur_curve_index]
 
 		for (i, (x, y, w)) in enumerate(cur_curve.points):
-			if distance(x, y, ex, ey) < 5:
+			if distance(x, y, ex, ey) < 8:
 				self.point_selected = None
 				self.point_dragged = i
 				self.selected_x = ex
@@ -50,7 +50,7 @@ class Board(QtWidgets.QFrame):
 		
 		if self.point_dragged is not None:
 			d = distance(self.selected_x, self.selected_y, ex, ey)
-			if d > 5:
+			if d > 8:
 				self.pointSelected = None
 				i = self.point_dragged
 				
@@ -63,7 +63,7 @@ class Board(QtWidgets.QFrame):
 		ex = event.x()
 		ey = event.y()
 		if self.point_selected:
-			if distance(self.selected_x, self.selected_y, ex, ey) < 5:
+			if distance(self.selected_x, self.selected_y, ex, ey) < 8:
 				self.point_dragged = None
 		if self.point_dragged is not None:
 			self.point_selected = self.point_dragged
@@ -72,7 +72,7 @@ class Board(QtWidgets.QFrame):
 		cur_curve = self.curves[self.cur_curve_index]
 
 		for (i, (x, y, w)) in enumerate(cur_curve.points):
-			if distance(x, y, ex, ey) < 5:
+			if distance(x, y, ex, ey) < 8:
 				self.point_selected = i
 				self.selected_x = ex
 				self.selected_y = ey

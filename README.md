@@ -14,4 +14,5 @@ run main.py
 You can:
 1. create and remove curves
 2. change degree of current curve
-3. change weight of selected point
+3. drag selected point 
+4. change weight of selected point
