@@ -11,6 +11,7 @@ GUI implemented with PyQt5.
 
 ## How to check it:
 run main.py
+
 You can:
 1. create and remove curves
 2. change degree of current curve
