@@ -8,9 +8,9 @@ class MainWindow(QMainWindow):
 		QMainWindow.__init__(self)
 		self.setObjectName("MainWindow")
 		self.setFixedSize(800, 640)
-		self.setupUi(self)
+		self.setup_ui(self)
 
-	def setupUi(self, MainWindow):
+	def setup_ui(self, MainWindow):
 		self.centralwidget = QtWidgets.QWidget(self)
 
 		self.board = Board(self)
@@ -119,5 +119,3 @@ if __name__ == "__main__":
 	MainWindow.show()
 
 	sys.exit(app.exec_())
-
-	

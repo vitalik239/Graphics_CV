@@ -1,6 +1,6 @@
 import numpy as np
 
-class deBoor:
+class DeBoor:
 	def __init__(self, points, power):
 		self.points = points
 		self.power = power
